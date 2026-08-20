@@ -1,0 +1,25 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  description: string;
+  publishDate: Date;
+  category: string;
+}
+const { slug, title, description, publishDate, category } = Astro.props;
+const catLabels: Record<string, string> = {
+  'marketing': 'Marketing',
+  'tools': 'Tools & Software',
+  'finance-ops': 'Finance & Ops',
+  'growth': 'Growth',
+};
+const dateStr = publishDate.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+<article class="post-card">
+  <div class="post-meta">
+    <a class="cat" href={`/category/${category}`}>{catLabels[category] ?? category}</a>
+    <time datetime={publishDate.toISOString()}>{dateStr}</time>
+  </div>
+  <h3><a href={`/blog/${slug}`}>{title}</a></h3>
+  <p>{description}</p>
+</article>

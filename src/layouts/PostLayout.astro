@@ -1,0 +1,61 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+  updatedDate?: Date;
+  category: string;
+  ogImage?: string;
+  slug: string;
+}
+const { title, description, publishDate, updatedDate, category, ogImage, slug } = Astro.props;
+
+const catLabels: Record<string, string> = {
+  'marketing': 'Marketing',
+  'tools': 'Tools & Software',
+  'finance-ops': 'Finance & Ops',
+  'growth': 'Growth',
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: publishDate.toISOString(),
+  dateModified: (updatedDate ?? publishDate).toISOString(),
+  mainEntityOfPage: new URL(`/blog/${slug}`, Astro.site).href,
+  author: {
+    '@type': 'Person',
+    name: 'Arvind', // TODO: full name + link to /about
+    url: new URL('/about', Astro.site).href,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'The SMB Desk',
+    logo: { '@type': 'ImageObject', url: new URL('/favicon.svg', Astro.site).href },
+  },
+};
+
+const dateStr = publishDate.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+const updatedStr = updatedDate?.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+<BaseLayout title={title} description={description} type="article" ogImage={ogImage} jsonLd={jsonLd}>
+  <main class="article">
+    <header>
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a> / <a href={`/category/${category}`}>{catLabels[category] ?? category}</a>
+      </nav>
+      <h1>{title}</h1>
+      <div class="post-meta">
+        <time datetime={publishDate.toISOString()}>{dateStr}</time>
+        {updatedStr && <span>Updated {updatedStr}</span>}
+      </div>
+    </header>
+    <div class="prose">
+      <slot />
+    </div>
+  </main>
+</BaseLayout>

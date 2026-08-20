@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const cats = [
+    { slug: 'marketing', label: 'Marketing', blurb: 'Email, SEO, social and campaigns that small teams can actually run.' },
+    { slug: 'tools', label: 'Tools & Software', blurb: 'Hands-on comparisons of CRMs, billing tools and software for Indian SMBs.' },
+    { slug: 'finance-ops', label: 'Finance & Ops', blurb: 'GST, invoicing, payments and the operational plumbing of a small business.' },
+    { slug: 'growth', label: 'Growth Guides', blurb: 'Step-by-step playbooks for finding and keeping customers.' },
+  ];
+  return cats.map((c) => ({ params: { category: c.slug }, props: { cat: c } }));
+}
+
+const { cat } = Astro.props;
+const posts = (await getCollection('blog', ({ data }) => !data.draft && data.category === Astro.params.category))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+---
+<BaseLayout title={cat.label} description={`${cat.blurb} From The SMB Desk, the resource site for Indian small businesses.`}>
+  <main class="wrap" style="padding-top:2.5rem;">
+    <span class="eyebrow">Section</span>
+    <h1 style="margin:0.5rem 0 0.8rem;">{cat.label}</h1>
+    <p style="max-width:52ch; color:var(--ink-soft); margin-bottom:1.8rem;">{cat.blurb}</p>
+    {posts.length > 0 ? (
+      <div class="post-grid">
+        {posts.map((post) => (
+          <PostCard
+            slug={post.id}
+            title={post.data.title}
+            description={post.data.description}
+            publishDate={post.data.publishDate}
+            category={post.data.category}
+          />
+        ))}
+      </div>
+    ) : (
+      <p>Guides for this section are on the way. <a href="/blog">Browse everything published so far →</a></p>
+    )}
+  </main>
+</BaseLayout>
