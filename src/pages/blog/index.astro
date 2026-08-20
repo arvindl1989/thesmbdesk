@@ -10,9 +10,9 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
   title="All guides"
   description="Every guide from The SMB Desk — marketing, tools, finance and growth resources for Indian small businesses, newest first."
 >
-  <main class="wrap" style="padding-top:2.5rem;">
+  <main class="wrap list-page">
     <span class="eyebrow">The full ledger</span>
-    <h1 style="margin:0.5rem 0 1.6rem;">All guides</h1>
+    <h1 class="list-title">All guides</h1>
     <div class="post-grid">
       {posts.map((post) => (
         <PostCard

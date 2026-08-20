@@ -18,10 +18,10 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft && data.cat
   .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
 ---
 <BaseLayout title={cat.label} description={`${cat.blurb} From The SMB Desk, the resource site for Indian small businesses.`}>
-  <main class="wrap" style="padding-top:2.5rem;">
+  <main class="wrap list-page">
     <span class="eyebrow">Section</span>
-    <h1 style="margin:0.5rem 0 0.8rem;">{cat.label}</h1>
-    <p style="max-width:52ch; color:var(--ink-soft); margin-bottom:1.8rem;">{cat.blurb}</p>
+    <h1 class="list-title">{cat.label}</h1>
+    <p class="list-intro">{cat.blurb}</p>
     {posts.length > 0 ? (
       <div class="post-grid">
         {posts.map((post) => (
