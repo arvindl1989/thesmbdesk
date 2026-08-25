@@ -23,7 +23,7 @@ const {
   jsonLd,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, '') || Astro.site;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageAbs = new URL(ogImage, Astro.site).href;
 const siteName = 'The SMB Desk';
 

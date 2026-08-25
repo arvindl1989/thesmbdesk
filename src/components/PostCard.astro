@@ -17,9 +17,9 @@ const dateStr = publishDate.toLocaleDateString('en-IN', { year: 'numeric', month
 ---
 <article class="post-card">
   <div class="post-meta">
-    <a class="cat" href={`/category/${category}`}>{catLabels[category] ?? category}</a>
+    <a class="cat" href={`/category/${category}/`}>{catLabels[category] ?? category}</a>
     <time datetime={publishDate.toISOString()}>{dateStr}</time>
   </div>
-  <h3><a href={`/blog/${slug}`}>{title}</a></h3>
+  <h3><a href={`/blog/${slug}/`}>{title}</a></h3>
   <p>{description}</p>
 </article>

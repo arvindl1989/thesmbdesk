@@ -1,20 +1,21 @@
 ---
 const nav = [
-  { href: '/blog', label: 'All guides' },
-  { href: '/category/marketing', label: 'Marketing' },
-  { href: '/category/tools', label: 'Tools' },
-  { href: '/category/finance-ops', label: 'Finance & Ops' },
-  { href: '/category/growth', label: 'Growth' },
-  { href: '/about', label: 'About' },
+  { href: '/blog/', label: 'All guides' },
+  { href: '/category/marketing/', label: 'Marketing' },
+  { href: '/category/tools/', label: 'Tools' },
+  { href: '/category/finance-ops/', label: 'Finance & Ops' },
+  { href: '/category/growth/', label: 'Growth' },
+  { href: '/about/', label: 'About' },
 ];
-const path = Astro.url.pathname.replace(/\/$/, '');
+const strip = (p: string) => p.replace(/\/+$/, '') || '/';
+const path = strip(Astro.url.pathname);
 ---
 <header class="site-header">
   <div class="wrap">
     <a class="wordmark" href="/">The SMB<span> Desk</span></a>
     <nav class="site-nav" aria-label="Main">
       {nav.map((item) => (
-        <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>
+        <a href={item.href} aria-current={path === strip(item.href) ? 'page' : undefined}>{item.label}</a>
       ))}
     </nav>
   </div>

@@ -35,7 +35,7 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft && data.cat
         ))}
       </div>
     ) : (
-      <p>Guides for this section are on the way. <a href="/blog">Browse everything published so far →</a></p>
+      <p>Guides for this section are on the way. <a href="/blog/">Browse everything published so far →</a></p>
     )}
   </main>
 </BaseLayout>

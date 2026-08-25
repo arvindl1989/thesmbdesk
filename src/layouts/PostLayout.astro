@@ -46,7 +46,7 @@ const updatedStr = updatedDate?.toLocaleDateString('en-IN', { year: 'numeric', m
   <main class="article">
     <header>
       <nav class="crumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a> / <a href={`/category/${category}`}>{catLabels[category] ?? category}</a>
+        <a href="/">Home</a> / <a href={`/category/${category}/`}>{catLabels[category] ?? category}</a>
       </nav>
       <h1>{title}</h1>
       <div class="post-meta">
