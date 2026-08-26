@@ -2,7 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - claude/push-github-repository-aajhq6
   workflow_dispatch:
 
 # Least privilege for the build; Pages deploy needs pages+id-token.
@@ -18,6 +20,10 @@ concurrency:
 
 jobs:
   build:
+    # The github-pages environment only accepts deployments from the
+    # repository's default branch. Follow whatever that currently is, so a
+    # push to any other branch skips cleanly instead of failing at the gate.
+    if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
