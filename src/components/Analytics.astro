@@ -1,0 +1,18 @@
+---
+import { GA_MEASUREMENT_ID } from '../consts';
+
+// Only load gtag on real builds with a configured ID, so `astro dev`
+// never reports traffic and the site ships no JS until GA is set up.
+const enabled = import.meta.env.PROD && GA_MEASUREMENT_ID !== '';
+---
+{enabled && (
+  <>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+    <script is:inline define:vars={{ id: GA_MEASUREMENT_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', id);
+    </script>
+  </>
+)}

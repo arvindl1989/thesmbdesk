@@ -34,7 +34,12 @@ jobs:
           cache: npm
 
       - run: npm ci
+
       - run: npm run build
+        env:
+          # Optional. Empty or unset simply disables the feature.
+          PUBLIC_GA_ID: ${{ vars.PUBLIC_GA_ID }}
+          PUBLIC_GSC_TOKEN: ${{ vars.PUBLIC_GSC_TOKEN }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
