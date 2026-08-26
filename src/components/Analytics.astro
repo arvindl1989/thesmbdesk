@@ -11,6 +11,10 @@ const enabled = import.meta.env.PROD && GA_MEASUREMENT_ID !== '';
     <script is:inline define:vars={{ id: GA_MEASUREMENT_ID }}>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
+      // define:vars wraps this script in an IIFE, so gtag would otherwise be
+      // function-scoped. Publish it on window, as Google's own snippet does,
+      // so later gtag('event', ...) calls and Tag Assistant can find it.
+      window.gtag = gtag;
       gtag('js', new Date());
       gtag('config', id);
     </script>

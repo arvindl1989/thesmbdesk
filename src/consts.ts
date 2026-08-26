@@ -14,7 +14,7 @@
  */
 
 /** GA4 measurement ID, e.g. 'G-ABC1234XYZ'. */
-const GA_FALLBACK = '';
+const GA_FALLBACK = 'G-H1L8MSYS3C';
 
 /** Search Console meta-tag token: the content="..." value only. */
 const GSC_FALLBACK = '';
