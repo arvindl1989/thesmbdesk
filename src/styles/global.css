@@ -313,6 +313,13 @@ a:hover { color: var(--accent-hover); text-decoration-color: currentColor; }
 .page h2 { margin-block: var(--s5) var(--s2); }
 .page p, .page ul { margin-bottom: var(--s3); }
 
+/* ===== FAQ ===== */
+.faq { margin-top: var(--s6); padding-top: var(--s4); border-top: 1px solid var(--border); }
+.faq h2 { margin-bottom: var(--s4); }
+.faq-item + .faq-item { margin-top: var(--s4); }
+.faq-item h3 { margin-bottom: var(--s2); font-size: 1.0625rem; }
+.faq-item p { color: var(--text-muted); }
+
 /* ===== Newsletter ===== */
 .newsletter {
   background: var(--surface-sunk);

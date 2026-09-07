@@ -270,9 +270,9 @@ you sell to next year.
 
 ## Related guides
 
-- [7 best free CRMs for Indian small businesses](/blog/best-free-crm-small-business-india/)
+- [best free CRM software for small business in India](/blog/best-free-crm-small-business-india/)
   — where your subscriber data should eventually live
-- [GST invoicing tools compared](/blog/gst-invoicing-tools-compared/) — closing
+- [GST billing software compared](/blog/gst-invoicing-tools-compared/) — closing
   the loop from campaign to paid invoice
 - More in [Marketing](/category/marketing/)
 

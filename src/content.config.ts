@@ -11,6 +11,9 @@ const blog = defineCollection({
     category: z.enum(['marketing', 'tools', 'finance-ops', 'growth']),
     tags: z.array(z.string()).default([]),
     ogImage: z.string().optional(),
+    // Rendered on the page and mirrored into FAQPage structured data.
+    // Answers may contain simple inline HTML (links, <strong>).
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
     draft: z.boolean().default(false),
   }),
 });

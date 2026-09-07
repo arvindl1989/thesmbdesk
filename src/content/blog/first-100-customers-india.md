@@ -163,7 +163,7 @@ one message you send that everybody reads.
 
 **Start today:** add a review link and a referral line to your invoice
 template. If your invoicing tool makes that awkward, see our comparison of
-[GST invoicing tools](/blog/gst-invoicing-tools-compared/).
+[GST billing software for small business](/blog/gst-invoicing-tools-compared/).
 
 ## What to do first, by business type
 
@@ -183,7 +183,7 @@ if you record where each one came from.
 
 You do not need software for this on day one. A spreadsheet with name, source,
 date and outcome is enough. When it stops being enough, our guide to
-[free CRMs for Indian small businesses](/blog/best-free-crm-small-business-india/)
+[free CRM software for small business](/blog/best-free-crm-small-business-india/)
 covers the next step.
 
 At 100 customers you will find that two or three of these eleven produced most

@@ -9,8 +9,9 @@ interface Props {
   category: string;
   ogImage?: string;
   slug: string;
+  faq?: { q: string; a: string }[];
 }
-const { title, description, publishDate, updatedDate, category, ogImage, slug } = Astro.props;
+const { title, description, publishDate, updatedDate, category, ogImage, slug, faq } = Astro.props;
 
 const catLabels: Record<string, string> = {
   'marketing': 'Marketing',
@@ -19,7 +20,7 @@ const catLabels: Record<string, string> = {
   'growth': 'Growth',
 };
 
-const jsonLd = {
+const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: title,
@@ -39,6 +40,22 @@ const jsonLd = {
   },
 };
 
+// Google requires FAQ content to be visible on the page, so the same items
+// render below and feed the structured data - never schema-only.
+const faqSchema = faq?.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faq.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    }
+  : null;
+
+const jsonLd = faqSchema ? [articleSchema, faqSchema] : articleSchema;
+
 const dateStr = publishDate.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
 const updatedStr = updatedDate?.toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
@@ -56,6 +73,17 @@ const updatedStr = updatedDate?.toLocaleDateString('en-IN', { year: 'numeric', m
     </header>
     <div class="prose">
       <slot />
+      {faq?.length && (
+        <section class="faq" aria-labelledby="faq-heading">
+          <h2 id="faq-heading">Frequently asked questions</h2>
+          {faq.map(({ q, a }) => (
+            <div class="faq-item">
+              <h3>{q}</h3>
+              <p set:html={a} />
+            </div>
+          ))}
+        </section>
+      )}
     </div>
   </main>
 </BaseLayout>
